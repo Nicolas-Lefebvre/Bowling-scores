@@ -1,0 +1,200 @@
+
+
+.scoreJoueur{
+  height:20px;
+  width:50px;
+}
+
+.nomJoueur{
+  height:20px;
+  width:100px;
+}
+
+.champion-icon{
+  height:1rem;
+  /* width:100px; */
+}
+
+header{
+  min-width: 100%;
+}
+
+.navbar{
+  /* background-color: rgba(87, 100, 99, 0.288); */
+  background-color: #537aa1;
+  color: white !important;
+  margin-bottom: 0px;
+  width: 100%;
+}
+
+nav a{
+  color: white !important;
+}
+
+nav a:hover{
+ display: block !important;
+}
+
+nav a.dropdown-item:hover{
+  color: #537aa1 !important;
+}
+
+.dropdown-menu{
+  background-color: #537aa1
+}
+
+a.dropdown-item:active {
+  background-color: white;
+}
+
+header li{
+  margin-right: 2rem;
+  font-size: 1.2rem;
+}
+
+.fa-bars{
+  color:rgb(173, 169, 169);
+}
+
+/* @media(max-width:750px){
+  section.list-section{
+    justify-content: space-evenly;
+    flex-direction: column;
+    display: flex;
+    max-width: 100%%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+} */
+
+
+/* @media (min-width: 800px){
+  section.list-section{
+    justify-content: space-evenly;
+    flex-direction: column;
+    display: flex;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+} */
+
+@media(min-width:750px){
+
+  #header-img {
+    width:100%;
+    /* position: relative; */
+    height: 300px;
+    /* overflow: hidden; */
+    margin-bottom: 3rem;
+    margin-top: 0px;
+  }
+  
+}
+
+@media(max-width:749px){
+
+  #header-img {
+    display: none;
+  }
+  
+}
+
+section{
+  min-height: 500px;
+}
+
+section h1{
+  margin-left: 2rem;
+  margin-bottom: 2rem;
+}
+
+section table{
+  align-self: flex-end;
+  margin: auto;
+  border: solid 1.2px #537aa1;
+  /* border-radius: 30px !important; */
+  border-collapse:collapse;
+  border:solid #537aa1 1px;
+  border-radius:60px;
+  padding: auto;
+  max-width: 100%;
+}
+/* td, th {
+  border-left:solid black 1px;
+  border-top:solid black 1px;
+} */
+
+
+thead th {
+  background-color: #537aa1;
+  border-top: none;
+  color: white;
+}
+
+/* td:first-child, th:first-child {
+   border-left: none;
+} */
+
+.list-h1{
+  margin-top: 2rem;
+}
+
+table i{
+  font-weight:normal;
+  font-size: .8rem;
+}
+
+.card{
+  border-color: #537aa1;
+
+}
+
+@media(max-width:749px){
+
+  .card{
+    margin-top: 2rem;
+  }
+  
+}
+
+
+.card h2{
+  font-size: 2rem;
+  color: #537aa1;
+}
+
+.card ol{
+    display : inline-block;
+    width:100%;
+    /* margin-left: 5rem !important; */
+    margin :auto;
+    text-align:left;
+}
+
+.card li{
+  text-align: left;
+  /* list-style-position: inside; */
+  /* padding-left: 50px; */
+}
+
+.card .btn{
+  margin-top: 1rem;
+  background-color: #537aa1;
+  border-color: #537aa1;
+  
+  /* display: flex; */
+  /* justify-content: flex-end; */
+}
+
+footer .row{
+  text-align: right;
+}
+
+/* .footer-title{
+  color :#537aa1;
+}
+
+.footer-phrase {
+  color:#537aa1;
+} */

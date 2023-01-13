@@ -1,0 +1,137 @@
+-- Adminer 4.7.6 MySQL dump
+
+SET NAMES utf8;
+SET time_zone = '+00:00';
+SET foreign_key_checks = 0;
+SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
+
+SET NAMES utf8mb4;
+
+DROP TABLE IF EXISTS `game`;
+CREATE TABLE `game` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` text NOT NULL,
+  `author` text NOT NULL,
+  `editor` text DEFAULT NULL,
+  `picture` text DEFAULT NULL,
+  `played_parties` int(11) NOT NULL DEFAULT 0,
+  `min_players` int(11) DEFAULT NULL,
+  `max_players` int(11) DEFAULT NULL,
+  `win_type` set('highest_score','lowest_score','no_score') NOT NULL,
+  `cooperative` tinyint(1) NOT NULL DEFAULT 0,
+  `team_play` tinyint(1) NOT NULL DEFAULT 0,
+  `record` int(11) DEFAULT NULL,
+  `recordman_id` int(11) DEFAULT NULL,
+  `most_victories` int(11) NOT NULL DEFAULT 0,
+  `champion_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `recordman_id` (`recordman_id`),
+  KEY `champion_id` (`champion_id`),
+  CONSTRAINT `game_ibfk_1` FOREIGN KEY (`recordman_id`) REFERENCES `player` (`id`),
+  CONSTRAINT `game_ibfk_2` FOREIGN KEY (`champion_id`) REFERENCES `player` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `game` (`id`, `name`, `author`, `editor`, `picture`, `played_parties`, `min_players`, `max_players`, `win_type`, `cooperative`, `team_play`, `record`, `recordman_id`, `most_victories`, `champion_id`) VALUES
+(10,	'Ark Nova',	'Mathias Wigge',	'Super Meeple',	NULL,	2,	2,	4,	'highest_score',	0,	0,	32,	2,	2,	2),
+(11,	'Brazil Imperial',	'Zé Mendes\r\n',	'Super Meeple',	NULL,	1,	1,	4,	'highest_score',	0,	0,	55,	1,	1,	1),
+(12,	'Terraforming Mars',	'Jacob Fryxelius',	'intrafin',	NULL,	5,	1,	5,	'highest_score',	0,	0,	170,	1,	3,	2),
+(13,	'Puerto Rico',	'Andreas Seyfarth',	'Aléa',	NULL,	7,	2,	5,	'highest_score',	0,	0,	68,	1,	3,	1);
+
+DROP TABLE IF EXISTS `partie`;
+CREATE TABLE `partie` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `game_id` int(11) NOT NULL,
+  `date` datetime NOT NULL,
+  `players_number` int(11) NOT NULL,
+  `winner_id` int(11) NOT NULL,
+  `winning_score` smallint(6) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `game_id` (`game_id`),
+  KEY `winner` (`winner_id`),
+  CONSTRAINT `partie_ibfk_1` FOREIGN KEY (`game_id`) REFERENCES `game` (`id`),
+  CONSTRAINT `partie_ibfk_8` FOREIGN KEY (`winner_id`) REFERENCES `player` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `partie` (`id`, `game_id`, `date`, `players_number`, `winner_id`, `winning_score`) VALUES
+(44,	10,	'2022-10-31 00:00:00',	2,	2,	32),
+(45,	11,	'2022-11-11 00:00:00',	2,	1,	55),
+(59,	10,	'2022-11-12 00:00:00',	2,	2,	28),
+(62,	12,	'2022-04-15 00:00:00',	2,	2,	146),
+(64,	12,	'2022-04-22 00:00:00',	2,	1,	120),
+(65,	12,	'2022-05-21 00:00:00',	2,	1,	170),
+(66,	12,	'2022-05-20 00:00:00',	2,	2,	119),
+(67,	12,	'2022-05-22 00:00:00',	2,	2,	134),
+(68,	13,	'2021-03-13 00:00:00',	2,	1,	52),
+(69,	13,	'2021-05-23 00:00:00',	2,	1,	62),
+(70,	13,	'2020-12-29 00:00:00',	4,	11,	54),
+(71,	13,	'2020-12-29 00:00:00',	3,	11,	52),
+(72,	13,	'2020-12-30 00:00:00',	2,	1,	68),
+(73,	13,	'2020-12-30 00:00:00',	2,	2,	60),
+(74,	13,	'2020-12-30 00:00:00',	3,	11,	60);
+
+DROP TABLE IF EXISTS `partie_player`;
+CREATE TABLE `partie_player` (
+  `player_id` int(11) NOT NULL,
+  `partie_id` int(11) NOT NULL,
+  `game_id` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  KEY `player_id` (`player_id`),
+  KEY `partie_id` (`partie_id`),
+  KEY `game_id` (`game_id`),
+  CONSTRAINT `partie_player_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `player` (`id`),
+  CONSTRAINT `partie_player_ibfk_2` FOREIGN KEY (`partie_id`) REFERENCES `partie` (`id`),
+  CONSTRAINT `partie_player_ibfk_3` FOREIGN KEY (`game_id`) REFERENCES `game` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `partie_player` (`player_id`, `partie_id`, `game_id`, `score`) VALUES
+(2,	44,	10,	32),
+(1,	44,	10,	19),
+(1,	45,	11,	55),
+(2,	45,	11,	52),
+(2,	59,	10,	28),
+(1,	59,	10,	11),
+(1,	62,	12,	130),
+(2,	62,	12,	146),
+(1,	64,	12,	120),
+(2,	64,	12,	107),
+(1,	65,	12,	170),
+(2,	65,	12,	134),
+(1,	66,	12,	110),
+(2,	66,	12,	119),
+(1,	67,	12,	124),
+(2,	67,	12,	134),
+(1,	68,	13,	52),
+(2,	68,	13,	48),
+(1,	69,	13,	62),
+(2,	69,	13,	50),
+(11,	70,	13,	54),
+(12,	70,	13,	44),
+(1,	70,	13,	43),
+(2,	70,	13,	44),
+(11,	71,	13,	52),
+(1,	71,	13,	47),
+(2,	71,	13,	47),
+(1,	72,	13,	68),
+(2,	72,	13,	51),
+(2,	73,	13,	60),
+(1,	73,	13,	56),
+(11,	74,	13,	60),
+(1,	74,	13,	50),
+(2,	74,	13,	51);
+
+DROP TABLE IF EXISTS `player`;
+CREATE TABLE `player` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` text NOT NULL,
+  `played_parties` int(11) NOT NULL DEFAULT 0,
+  `won_parties` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `player` (`id`, `name`, `played_parties`, `won_parties`) VALUES
+(1,	'Maya',	15,	6),
+(2,	'Nico',	15,	6),
+(11,	'Edgard',	3,	3),
+(12,	'Maëlle',	1,	0);
+
+-- 2022-11-15 08:08:02
