@@ -85,7 +85,7 @@ class PartieController extends CoreController
 
 
             //On insère les nouveaux joueurs dans la BDD et on récupère au passage les id des nouveaux joueurs desormais insérés dans la BDD
-            foreach ($players as  $player) 
+            foreach ($partiePlayers as  $player) 
             {
               if( empty($player->getId()))
               {
@@ -102,7 +102,7 @@ class PartieController extends CoreController
             // on cherche le winner id
            $winnerId="";
            $winnerName = $_POST['winnerName'];
-           foreach($players as $player)
+           foreach($partiePlayers as $player)
            {
             if($winnerName === $player->getName())
             {
